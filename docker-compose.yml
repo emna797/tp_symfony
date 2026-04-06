@@ -1,0 +1,21 @@
+# Base de données MariaDB pour le TP (option Docker).
+# Démarrage : docker compose up -d
+# DATABASE_URL dans .env.local (app en local sur la machine hôte) :
+#   mysql://root:secret@127.0.0.1:3306/symfony_db?serverVersion=mariadb-10.4.11
+# Si l’application PHP tourne dans un conteneur sur le même réseau, utilisez l’hôte :
+#   mysql://root:secret@symfony-mysql:3306/symfony_db?serverVersion=mariadb-10.4.11
+
+services:
+  symfony-mysql:
+    image: mariadb:10.4
+    container_name: symfony-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: symfony_db
+    ports:
+      - "3306:3306"
+    volumes:
+      - symfony-mysql-data:/var/lib/mysql
+
+volumes:
+  symfony-mysql-data:

@@ -2,6 +2,9 @@
 framework:
     secret: '%env(APP_SECRET)%'
 
+    # Permet les formulaires POST avec _method=DELETE pour la route DELETE /article/delete/{id}
+    http_method_override: true
+
     # Note that the session will be started ONLY if you read or write from it.
     session: true
 

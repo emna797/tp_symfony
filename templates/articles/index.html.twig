@@ -1,30 +1,48 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des Articles{% endblock %}
+{% block title %}Liste des articles{% endblock %}
 
 {% block body %}
 
-{% if articles %}
-<table class="table table-striped">
-<thead>
-<tr>
-<th>Article</th>
-<th>Actions</th>
-</tr>
-</thead>
-<tbody>
-{% for article in articles %}
-<tr>
-<td>{{ article }}</td>
-<td>
-<a href="#" class="btn btn-dark">Détails</a>
-</td>
-</tr>
-{% endfor %}
-</tbody>
-</table>
+<h1 class="mb-4">Liste des articles</h1>
+
+<p class="mb-3">
+    <a href="{{ path('article_new') }}" class="btn btn-primary">Créer un article</a>
+</p>
+
+{% if articles is not empty %}
+<div class="table-responsive">
+    <table class="table table-striped table-bordered align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Prix</th>
+                <th class="text-end">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for article in articles %}
+            <tr>
+                <td>{{ article.id }}</td>
+                <td>{{ article.nom }}</td>
+                <td>{{ article.prix }}</td>
+                <td class="text-end text-nowrap">
+                    <a href="{{ path('article_show', {id: article.id}) }}" class="btn btn-sm btn-outline-secondary">Voir</a>
+                    <a href="{{ path('article_edit', {id: article.id}) }}" class="btn btn-sm btn-outline-primary">Modifier</a>
+                    <form class="d-inline" method="post" action="{{ path('article_delete', {id: article.id}) }}" onsubmit="return confirm('Supprimer cet article ?');">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ article.id) }}">
+                        <button type="submit" class="btn btn-sm btn-outline-danger">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% else %}
-<p>Aucun article</p>
+    <p class="text-muted">Aucun article pour le moment.</p>
 {% endif %}
 
 {% endblock %}

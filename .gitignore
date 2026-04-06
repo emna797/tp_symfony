@@ -1,12 +1,13 @@
-
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
 /.env.*.local
+/.env            # <-- ajoute cette ligne
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
 /var/
 /vendor/
+/.env.local       # <-- tu peux laisser celle-ci, déjà présente
 ###< symfony/framework-bundle ###
 
 ###> phpunit/phpunit ###
