@@ -5,8 +5,13 @@
 {% block body %}
 
 <p>
-    <a href="{{ path('article_index') }}" class="btn btn-outline-secondary btn-sm">&larr; Retour à la liste</a>
-    <a href="{{ path('article_edit', {id: article.id}) }}" class="btn btn-primary btn-sm">Modifier</a>
+    <a href="{{ path('article_index') }}" class="btn btn-outline-secondary btn-sm">
+        &larr; Retour à la liste
+    </a>
+
+    <a href="{{ path('article_edit', {id: article.id}) }}" class="btn btn-primary btn-sm">
+        Modifier
+    </a>
 </p>
 
 <h1 class="mb-3">{{ article.nom }}</h1>
@@ -14,16 +19,28 @@
 <dl class="row">
     <dt class="col-sm-2">ID</dt>
     <dd class="col-sm-10">{{ article.id }}</dd>
+
     <dt class="col-sm-2">Nom</dt>
     <dd class="col-sm-10">{{ article.nom }}</dd>
+
     <dt class="col-sm-2">Prix</dt>
     <dd class="col-sm-10">{{ article.prix }}</dd>
+
+    <dt class="col-sm-2">Catégorie</dt>
+    <dd class="col-sm-10">
+        {{ article.category ? article.category.titre : 'Non définie' }}
+    </dd>
 </dl>
 
-<form method="post" action="{{ path('article_delete', {id: article.id}) }}" onsubmit="return confirm('Supprimer cet article ?');">
+<form method="post" action="{{ path('article_delete', {id: article.id}) }}"
+      onsubmit="return confirm('Supprimer cet article ?');">
+
     <input type="hidden" name="_method" value="DELETE">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ article.id) }}">
-    <button type="submit" class="btn btn-danger">Supprimer</button>
+
+    <button type="submit" class="btn btn-danger">
+        Supprimer
+    </button>
 </form>
 
 {% endblock %}

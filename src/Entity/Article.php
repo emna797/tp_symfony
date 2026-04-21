@@ -23,6 +23,9 @@ class Article
     #[Assert\NotBlank]
     private ?string $prix = null;
 
+    #[ORM\ManyToOne(inversedBy: 'articles')]
+    private ?Category $category = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -48,6 +51,18 @@ class Article
     public function setPrix(string|int $prix): static
     {
         $this->prix = (string) $prix;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): static
+    {
+        $this->category = $category;
 
         return $this;
     }

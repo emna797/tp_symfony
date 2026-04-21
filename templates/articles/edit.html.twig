@@ -7,13 +7,24 @@
 <h1 class="mb-4">Modifier l’article</h1>
 
 {{ form_start(form) }}
+
     {{ form_row(form.nom) }}
     {{ form_row(form.prix) }}
-    {{ form_row(form.save) }}
+
+    {# AJOUT catégorie ici #}
+    {{ form_row(form.category) }}
+
+    {# bouton EN DERNIER #}
+    <div class="mt-3">
+        {{ form_row(form.save) }}
+    </div>
+
 {{ form_end(form) }}
 
 <p class="mt-3">
-    <a href="{{ path('article_show', {id: article.id}) }}" class="btn btn-link">Annuler</a>
+    <a href="{{ path('article_show', {id: article.id}) }}" class="btn btn-link">
+        Annuler
+    </a>
 </p>
 
 {% endblock %}

@@ -9,7 +9,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-
+use App\Entity\Category;
+use App\Form\CategoryType;
 class IndexController extends AbstractController
 {
     public function __construct(
@@ -82,4 +83,23 @@ class IndexController extends AbstractController
 
         return $this->redirectToRoute('article_index');
     }
+    #[Route('/category/newCat', name: 'new_category')]
+public function newCategory(Request $request): Response
+{
+    $category = new Category();
+
+    $form = $this->createForm(CategoryType::class, $category);
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+        $this->entityManager->persist($category);
+        $this->entityManager->flush();
+
+        return $this->redirectToRoute('article_index');
+    }
+
+    return $this->render('articles/newCategory.html.twig', [
+        'form' => $form->createView(),
+    ]);
+}
 }
