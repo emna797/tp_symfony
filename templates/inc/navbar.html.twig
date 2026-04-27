@@ -1,12 +1,16 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-0">
     <div class="container">
-        <a class="navbar-brand" href="{{ path('article_index') }}">Gestion d'articles</a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand" href="{{ path('article_index') }}">
+            Gestion d'articles
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarMain">
+
             <ul class="navbar-nav ms-auto">
 
                 <li class="nav-item">
@@ -21,14 +25,38 @@
                     </a>
                 </li>
 
-                <!-- ✅ Nouveau lien -->
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('new_category') }}">
                         Ajouter catégorie
                     </a>
                 </li>
 
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                        Rechercher
+                    </a>
+
+                    <ul class="dropdown-menu">
+
+                        <li>
+                            <a class="dropdown-item" href="{{ path('article_search_category') }}">
+                                Par catégorie
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item" href="{{ path('article_search_price') }}">
+                                Par prix
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </li>
+
             </ul>
+
         </div>
     </div>
 </nav>
